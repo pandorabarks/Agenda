@@ -176,7 +176,24 @@ int busqueda(){
         return 0;
     }
 
-int guardar(){
+int guardar() {
+    FILE *f = fopen("contactos.txt", "w");
+    if (f == NULL) {
+        printf("Error al abrir el archivo\n");
+        return 1;
+    }
+
+    struct persona *temp = head->next;
+    while (temp != NULL) {
+        fprintf(f, "Nombre: %s\n", temp->nombre);
+        fprintf(f, "Apellidos: %s\n", temp->apellidos);
+        fprintf(f, "Teléfono: %s\n", temp->telefono);
+        fprintf(f, "Email: %s\n\n", temp->email);
+        temp = temp->next;
+    }
+
+    fclose(f);
+    printf("\nAVISO DEL SISTEMA: Contactos guardados exitosamente en contactos.txt\n");
     return 0;
 }
 
