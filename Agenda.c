@@ -72,6 +72,7 @@ int main(){
 int agregar(){
     persona *nuevo = (struct persona*) malloc (sizeof(struct persona));
 
+    printf("\n\t-- Agregando a una nueva persona --\n");
     printf("\nIngresa el nombre: \n");
     scanf("%s", &nuevo->nombre);
     printf("Ingrese ambos apellidos: \n");
@@ -83,6 +84,7 @@ int agregar(){
 
     nuevo -> next = head ->next;
     head -> next = nuevo;
+    printf("\nAVISO DEL SISTEMA: Persona añadida exitosamente.\n");
     return 0;
 
 }
@@ -95,36 +97,79 @@ int mostrar(){
     persona *t;
     t = head -> next;
     
-    printf("\n\t-- Listado de estudiantes --\n Esta es una lista de todos los estudiantes ingresados en esta agenda:\n");
+    printf("\n\t-- Listado de estudiantes --\n\nEsta es una lista de todos los estudiantes ingresados en esta agenda:\n");
 
     while (t->next != NULL)
     {
         printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
         t= t->next;
+        return 0;
     }
-    return 0;
 }
 
 int busqueda(){
-    struct persona *t;
-    t = head->next;
-    char palabraclave[30];
+        struct persona *t;
+        t=head->next;
+        char nombretemp[100];
 
-    printf("Ingresa el nombre de la persona que deseas buscar: ");
-    scanf("%s", &palabraclave);
+        if (head == NULL){
+            printf("La lista está vacía.\n");
+            return 0;
+        }
 
-    if (strcmp(t-> nombre, palabraclave) == 0)
-    {
-         printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
+        printf("Ingresa el nombre de la persona: ");
+        scanf("%s", nombretemp);
+        
+        while (t != NULL)
+        {
+            if (strcmp(t->nombre, nombretemp) == 0)
+            {
+                printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
+                return 0;
+            }
+            t= t->next;
+        }
+        
+        printf("Esta persona no fue encontrada, intenta nuevamente.\n");
+        return 0;
     }
-    t = t->next;
-    return 0;
-}
 
 int guardar(){
     return 0;
 }
 
 int modificar(){
+    struct persona *t = head->next;
+    char nombretemp[100], apellidostemp[100], telefonotemp[30], emailtemp[100];
+    char nuevonombre[100], nuevoapellido[100], nuevotelefono[30], nuevoemail[100];
+
+    printf("\n\t-- Modificando los datos --");
+    if (head == NULL)
+    {
+        printf("La lista es vacía.\n");
+        return 0;
+    }
+
+    printf("\nIngresa el nombre de la persona para modificar su información: ");
+    scanf("%s", nombretemp);
+
+    while (t != NULL)
+    {
+        if (strcmp(t->nombre, nombretemp) == 0)
+        {
+            printf("\n\nPersona encontrada: %s %s\n\nAVISO: Se modificarán todos los registros que contengan este nombre, proceda con precaución.\n", t->nombre, t->apellidos);
+            printf("\nIngresa su nuevo nombre: ");
+            scanf("%s", nuevonombre);
+
+            // Copia los strings nuevos a la categoría correspondiente en el struct.
+            strcpy(t->nombre, nuevonombre);
+
+            printf("\nTodos los registros encontrados se han modificado.\n");
+            return 0;
+        }
+        t= t->next;
+    }
+
+    printf("Persona no encontrada.\n");
     return 0;
 }
