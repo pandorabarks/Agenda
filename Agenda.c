@@ -129,13 +129,24 @@ int mostrar(){
     
     printf("\n\t-- Listado de estudiantes --\n\nEsta es una lista de todos los estudiantes ingresados en esta agenda:\n");
 
-    while (t->next != NULL)
+    if (head == NULL || head ->next == NULL)
     {
-        printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
-        t= t->next;
+        printf("La lista de contactos está vacía.");
         return 0;
     }
+    
+    
+    while (t != NULL){
+        if (t->next != NULL)
+        {
+            printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
+            t = t->next;
+        }
+        return 0;
+    }
+    return 0;
 }
+
 
 int busqueda(){
         struct persona *t;
@@ -147,6 +158,7 @@ int busqueda(){
             return 0;
         }
 
+        printf("\n\t-- Búsqueda --\n\n");
         printf("Ingresa el nombre de la persona: ");
         scanf("%s", nombretemp);
         
