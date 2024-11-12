@@ -90,6 +90,36 @@ int agregar(){
 }
 
 int borrar(){
+    struct persona *actual;
+    struct persona *prev;
+    actual = head -> next;
+    prev = head;
+    char nombretemp[100];
+
+    if (head == NULL)
+    {
+        printf("\nLa lista está vacía.");
+        return 0;
+    }
+
+    printf("\n\t-- Borrar registro --\n");
+    printf("\nADVERTENCIA: Todos los registros que contengan el nombre a continuación serán eliminados, proceda con precaución.\nIntroduzca el nombre del registro a eliminar: ");
+    scanf("%s", nombretemp);
+
+    while (actual->next != NULL)
+    {
+        if (strcmp(actual->nombre, nombretemp) == 0)
+        {
+            printf("\nNombres que se van a borrar: %s %s\n", actual->nombre);
+            prev -> next = actual -> next;
+            free(actual);
+        }
+        prev = actual;
+        actual = actual -> next;
+
+    }
+
+    printf("\nEsta persona no fue encontrada, intenta nuevamente.\n");
     return 0;
 }
 
@@ -160,9 +190,18 @@ int modificar(){
             printf("\n\nPersona encontrada: %s %s\n\nAVISO: Se modificarán todos los registros que contengan este nombre, proceda con precaución.\n", t->nombre, t->apellidos);
             printf("\nIngresa su nuevo nombre: ");
             scanf("%s", nuevonombre);
-
+            printf("\nIngresa sus nuevos apellidos: ");
+            scanf("%s", nuevoapellido);
+            printf("\nIngresa su nuevo teléfono: ");
+            scanf("%s", nuevotelefono);
+            printf("\nIngresa su nuevo email: ");
+            scanf("%s", nuevoemail);
+        
             // Copia los strings nuevos a la categoría correspondiente en el struct.
             strcpy(t->nombre, nuevonombre);
+            strcpy(t->apellidos, nuevoapellido);
+            strcpy(t->telefono, nuevotelefono);
+            strcpy(t->email, nuevoemail);
 
             printf("\nTodos los registros encontrados se han modificado.\n");
             return 0;
