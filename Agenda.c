@@ -13,9 +13,9 @@ int guardar();
 
 typedef struct persona
 {
-    char nombre[30]; 
-    char apellidos[90];
-    char email[90];
+    char nombre[100]; 
+    char apellidos[100];
+    char email[100];
     char telefono[30];
     struct persona *next;
 }persona;
@@ -88,7 +88,7 @@ int agregar(){
 }
 
 int borrar(){
-
+    return 0;
 }
 
 int mostrar(){
@@ -113,14 +113,18 @@ int busqueda(){
     printf("Ingresa el nombre de la persona que deseas buscar: ");
     scanf("%s", &palabraclave);
 
-    while (t->next != NULL)
+    if (strcmp(t-> nombre, palabraclave) == 0)
     {
-        if (strcmp(t-> nombre, palabraclave == 0))
-        {
-            printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
-            t= t->next;
-        }
-        t = t->next;
+         printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
     }
+    t = t->next;
+    return 0;
+}
+
+int guardar(){
+    return 0;
+}
+
+int modificar(){
     return 0;
 }
