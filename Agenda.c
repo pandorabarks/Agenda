@@ -135,8 +135,7 @@ int mostrar(){
         return 0;
     }
     
-    
-    while (t != NULL){
+    while (t != NULL && t != tail){
         if (t->next != NULL)
         {
             printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
@@ -184,7 +183,7 @@ int guardar() {
     }
 
     struct persona *temp = head->next;
-    while (temp != NULL) {
+    while (temp != NULL && t != tail) {
         fprintf(f, "Nombre: %s\n", temp->nombre);
         fprintf(f, "Apellidos: %s\n", temp->apellidos);
         fprintf(f, "Teléfono: %s\n", temp->telefono);
