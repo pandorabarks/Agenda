@@ -183,7 +183,7 @@ int guardar() {
     }
 
     struct persona *temp = head->next;
-    while (temp != NULL && t != tail) {
+    while (temp != NULL && temp != tail) {
         fprintf(f, "Nombre: %s\n", temp->nombre);
         fprintf(f, "Apellidos: %s\n", temp->apellidos);
         fprintf(f, "Teléfono: %s\n", temp->telefono);
