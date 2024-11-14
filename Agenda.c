@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 int agregar();
 int borrar();
@@ -11,23 +12,29 @@ int busqueda();
 int mostrar();
 int guardar();
 
+// Una estructura para almacenar todos los datos necesarios de cada persona en la agenda. 
 typedef struct persona
 {
     char nombre[100]; 
     char apellidos[100];
     char email[100];
-    char telefono[30];
+    char telefono[30]; // Todos los valores se guardan como cadenas de caracteres, esto se hace por simplicidad y para evitar lidiar con cosas como un número de télefono que es más grande que el entero más grande.
     struct persona *next;
 }persona;
 
+// Inicialización
 struct persona *head;
 struct persona *tail;
 
 int main(){
+    // La función main() solo incluye la inicialización de los punteros de los structs, la reservación dinámica de memoria y el menú principal.
     int sel;
 
     head = (struct persona*)malloc(sizeof(struct persona));
     tail = (struct persona*)malloc(sizeof(struct persona));
+
+    head -> next = tail;
+    tail -> next = NULL;
 
     do
     {
@@ -69,6 +76,8 @@ int main(){
     
 }
 
+// Agrega a una persona a la estructura y deja espacio para añadir una cantidad cualquiera en la agenda.
+
 int agregar(){
     persona *nuevo = (struct persona*) malloc (sizeof(struct persona));
 
@@ -84,11 +93,13 @@ int agregar(){
 
     nuevo -> next = head ->next;
     head -> next = nuevo;
-    printf("\nAVISO DEL SISTEMA: Persona añadida exitosamente.\n");
+    printf("\nAVISO DEL SISTEMA: Persona añadida exitosamente.\n\n");
     return 0;
 
 }
 
+
+// Usa la búsqueda, compara cadenas, después libera la memoria.
 int borrar(){
     struct persona *actual;
     struct persona *prev;
@@ -96,6 +107,7 @@ int borrar(){
     prev = head;
     char nombretemp[100];
 
+    // Si no hay ningún registro...
     if (head == NULL)
     {
         printf("\nLa lista está vacía.");
@@ -119,34 +131,29 @@ int borrar(){
 
     }
 
+    // si strcmp(actual->nombre, nombretemp) == 1, es decir, si las cadenas no coinciden...
     printf("\nEsta persona no fue encontrada, intenta nuevamente.\n");
     return 0;
 }
 
-int mostrar(){
-    persona *t;
-    t = head -> next;
-    
-    printf("\n\t-- Listado de estudiantes --\n\nEsta es una lista de todos los estudiantes ingresados en esta agenda:\n");
 
-    if (head == NULL || head ->next == NULL)
-    {
-        printf("La lista de contactos está vacía.");
-        return 0;
-    }
+// Muestra a todas las personas de la agenda almacenadas.
+int mostrar(){
     
-    while (t != NULL && t != tail){
-        if (t->next != NULL)
-        {
-            printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
-            t = t->next;
-        }
-        return 0;
+    struct persona *t = head -> next;
+    printf("\n\t-- Listado de personas --\n");
+
+    while (t != NULL && t !=tail)
+    {
+        printf("\nNombre de la persona: %s %s\n", t->nombre);
+        printf("Email: %s\n", t->email);
+        printf("Numero de telefono: %s\n", t->telefono);
+        t = t->next;
     }
     return 0;
 }
 
-
+// Puedes realizar una búsqueda de cualquier persona en la agenda, independientemente de su posición en la estructura, todo lo que necesitas es el primer nombre.
 int busqueda(){
         struct persona *t;
         t=head->next;
@@ -175,13 +182,19 @@ int busqueda(){
         return 0;
     }
 
+// Esta función guarda la lista de contactos en un documento de texto para futuros propósitos.
 int guardar() {
+    // Crea un archivo llamado contactos.txt que se almacena en el mismo directorio donde se ejecute este programa.
     FILE *f = fopen("contactos.txt", "w");
+    
+    // Si no es posible crear el archivo, dígase por tratarse de un directorio de solo lectura...
     if (f == NULL) {
-        printf("Error al abrir el archivo\n");
+        printf("Error al crear el archivo.\n");
         return 0;
     }
 
+    fprintf(f, "\t-- Lista de contactos --\n");
+    // Cicla entre los elementos del struct para poder llenar la lista.
     struct persona *t = head->next;
      while (t != NULL && t != tail){
         if (t->next != NULL)
@@ -199,6 +212,7 @@ int guardar() {
     return 0;
 }
 
+// Se puede modificar los valores que contenga cualquier contacto en la estrucura, siempre y cuando se cuente con el nombre de la persona.
 int modificar(){
     struct persona *t = head->next;
     char nombretemp[100], apellidostemp[100], telefonotemp[30], emailtemp[100];

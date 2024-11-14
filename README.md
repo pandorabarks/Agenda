@@ -1,6 +1,6 @@
 # ¡Una agenda hecha en C!
 
-Este repositorio contiene una agenda básica hecha en C para una demostración del uso de estructuras.
+Este repositorio contiene una agenda básica hecha en C para una demostración del uso de estructuras (_structs_).
 
 ## ¿Qué hace?
 
@@ -14,7 +14,9 @@ Además, se permite exportar la lista de personas registradas en forma de un doc
 
 Este programa y código fuente son proporcionados con propósitos educativos y de demostración únicamente. :pencil: Proceder con precaución si se quiere hacer *fork* o un *branch* de este proyecto.
 
-### Hecho por Danielle y Josué
+No recomendamos usarlo para nada serio.
+
+Hecho por Danielle y Josué!
 
 División de Ingenierías del Campus Irapuato-Salamanca - Universidad de Guanajuato
 
