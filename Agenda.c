@@ -1,7 +1,5 @@
 // Una agenda en C, usando estructuras.
-//IMPORTANTE: Este programa está diseñado únicamente para propósitos educativos.
-
-// Hecho por Josué
+// IMPORTANTE: Este programa está diseñado únicamente para propósitos educativos.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -181,18 +179,21 @@ int guardar() {
     FILE *f = fopen("contactos.txt", "w");
     if (f == NULL) {
         printf("Error al abrir el archivo\n");
-        return 1;
+        return 0;
     }
 
     struct persona *t = head->next;
-    while (t != NULL && t != tail) {
-        fprintf(f, "Nombre: %s\n", t->nombre);
-        fprintf(f, "Apellidos: %s\n", t->apellidos);
-        fprintf(f, "Teléfono: %s\n", t->telefono);
-        fprintf(f, "Email: %s\n\n", t->email);
-        t = t->next;
+     while (t != NULL && t != tail){
+        if (t->next != NULL)
+        {
+            fprintf(f, "Nombre: %s\n", t->nombre);
+            fprintf(f, "Apellidos: %s\n", t->apellidos);
+            fprintf(f, "Teléfono: %s\n", t->telefono);
+            fprintf(f, "Email: %s\n\n", t->email);
+            t = t->next;
+        }
+        return 0;
     }
-
     fclose(f);
     printf("\nAVISO DEL SISTEMA: Contactos guardados exitosamente en contactos.txt\n");
     return 0;
