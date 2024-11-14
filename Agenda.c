@@ -197,18 +197,14 @@ int guardar() {
     // Cicla entre los elementos del struct para poder llenar la lista.
     struct persona *t = head->next;
      while (t != NULL && t != tail){
-        if (t->next != NULL)
-        {
             fprintf(f, "Nombre: %s\n", t->nombre);
             fprintf(f, "Apellidos: %s\n", t->apellidos);
             fprintf(f, "Teléfono: %s\n", t->telefono);
             fprintf(f, "Email: %s\n\n", t->email);
             t = t->next;
-        }
-        return 0;
     }
     fclose(f);
-    printf("\nAVISO DEL SISTEMA: Contactos guardados exitosamente en contactos.txt\n");
+    printf("\nAVISO DEL SISTEMA: Contactos guardados exitosamente en contactos.txt\n\n");
     return 0;
 }
 
