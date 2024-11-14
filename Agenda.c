@@ -1,5 +1,7 @@
 // Una agenda en C, usando estructuras.
 //IMPORTANTE: Este programa está diseñado únicamente para propósitos educativos.
+
+// Hecho por Josué
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
