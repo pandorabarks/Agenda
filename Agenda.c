@@ -15,13 +15,15 @@ int guardar();
 typedef struct persona
 {
     char nombre[100]; 
-    char apellidos[100];
+    char apellidos[100]; // A pesar de que esté en plural, solo almacenará un apellido.
     char email[100];
-    char telefono[30]; // Todos los valores se guardan como cadenas de caracteres, esto se hace por simplicidad y para evitar lidiar con cosas como un número de télefono que es más grande que el entero más grande.
+    char telefono[30];
+    /* Todos los valores se guardan como cadenas de caracteres, esto se hace por simplicidad
+    y para evitar lidiar con cosas como un número de télefono que es más grande que el entero más grande.*/
     struct persona *next;
 }persona;
 
-// Inicialización
+// head y tail para representar el inicio y el final de la lista de contactos
 struct persona *head;
 struct persona *tail;
 
@@ -29,6 +31,7 @@ int main(){
     // La función main() solo incluye la inicialización de los punteros de los structs, la reservación dinámica de memoria y el menú principal.
     int sel;
 
+    // Se inicializa la reservación dinámica de memoria.
     head = (struct persona*)malloc(sizeof(struct persona));
     tail = (struct persona*)malloc(sizeof(struct persona));
 
@@ -83,7 +86,7 @@ int agregar(){
     printf("\n\t-- Agregando a una nueva persona --\n");
     printf("\nIngresa el nombre: \n");
     scanf("%s", &nuevo->nombre);
-    printf("Ingrese ambos apellidos: \n");
+    printf("Ingresa un apellido: \n");
     scanf("%s", &nuevo->apellidos);
     printf("Ingresa el número de teléfono: \n");
     scanf("%s", &nuevo->telefono);
