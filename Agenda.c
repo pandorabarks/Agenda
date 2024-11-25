@@ -147,7 +147,7 @@ int mostrar(){
 
     while (t != NULL && t !=tail)
     {
-        printf("\nNombre de la persona: %s %s\n", t->nombre);
+        printf("\nNombre de la persona: %s %s\n", t->nombre, t->apellidos);
         printf("Email: %s\n", t->email);
         printf("Numero de telefono: %s\n", t->telefono);
         t = t->next;
