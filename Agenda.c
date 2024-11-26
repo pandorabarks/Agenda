@@ -213,8 +213,7 @@ int guardar() {
 // Se puede modificar los valores que contenga cualquier contacto en la estrucura, siempre y cuando se cuente con el nombre de la persona.
 int modificar(){
     struct persona *t = head->next;
-    char nombretemp[100], apellidostemp[100], telefonotemp[30], emailtemp[100];
-    char nuevonombre[100], nuevoapellido[100], nuevotelefono[30], nuevoemail[100];
+    char nombretemp[100], nuevonombre[100], nuevoapellido[100], nuevotelefono[30], nuevoemail[100];
 
     printf("\n\t-- Modificando los datos --");
     if (head == NULL)
