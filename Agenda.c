@@ -102,41 +102,35 @@ int agregar(){
 
 
 // Usa la búsqueda, compara cadenas, después libera la memoria.
-int borrar(){
-    struct persona *actual;
-    struct persona *prev;
-    actual = head -> next;
-    prev = head;
-    char nombretemp[100];
 
-    // Si no hay ningún registro...
-    if (head == NULL)
-    {
-        printf("\nLa lista está vacía.");
+int borrar(){
+        struct persona *t;
+        t=head->next;
+        char nombretemp[100];
+
+        if (head == NULL){
+            printf("La lista está vacía.\n");
+            return 0;
+        }
+
+        printf("\n\t-- Borrar contacto --\n\n");
+        printf("PRECAUCIÓN: Todos los registros que contengan el nombre que ingreses serán eliminados\nIngresa el nombre de la persona: ");
+        scanf("%s", nombretemp);
+        
+        while (t != NULL)
+        {
+            if (strcmp(t->nombre, nombretemp) == 0)
+            {
+                printf("Nombre: %s %s\n", t->nombre, t->apellidos);
+                free(t);
+            }
+            t= t->next;
+            return 0;
+        }
+        
+        printf("Esta persona no fue encontrada, intenta nuevamente.\n");
         return 0;
     }
-
-    printf("\n\t-- Borrar registro --\n");
-    printf("\nADVERTENCIA: Todos los registros que contengan el nombre a continuación serán eliminados, proceda con precaución.\nIntroduzca el nombre del registro a eliminar: ");
-    scanf("%s", nombretemp);
-
-    while (actual->next != NULL)
-    {
-        if (strcmp(actual->nombre, nombretemp) == 0)
-        {
-            printf("\nNombres que se van a borrar: %s %s\n", actual->nombre);
-            prev -> next = actual -> next;
-            free(actual);
-        }
-        prev = actual;
-        actual = actual -> next;
-
-    }
-
-    // si strcmp(actual->nombre, nombretemp) == 1, es decir, si las cadenas no coinciden...
-    printf("\nEsta persona no fue encontrada, intenta nuevamente.\n");
-    return 0;
-}
 
 
 // Muestra a todas las personas de la agenda almacenadas.
