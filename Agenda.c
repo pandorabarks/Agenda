@@ -117,15 +117,14 @@ int borrar(){
         printf("PRECAUCIÓN: Todos los registros que contengan el nombre que ingreses serán eliminados\nIngresa el nombre de la persona: ");
         scanf("%s", nombretemp);
         
-        while (t != NULL)
+        while (t != NULL && t != tail)
         {
             if (strcmp(t->nombre, nombretemp) == 0)
             {
-                printf("Nombre: %s %s\n", t->nombre, t->apellidos);
+                printf("Contacto eliminado: %s %s\n", t->nombre, t->apellidos);
                 free(t);
             }
             t= t->next;
-            return 0;
         }
         
         printf("Esta persona no fue encontrada, intenta nuevamente.\n");
