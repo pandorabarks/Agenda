@@ -163,12 +163,11 @@ int busqueda(){
         printf("Ingresa el nombre de la persona: ");
         scanf("%s", nombretemp);
         
-        while (t != NULL)
+        while (t != NULL && t != tail)
         {
             if (strcmp(t->nombre, nombretemp) == 0)
             {
                 printf("Nombre: %s\nApellidos: %s\nNúmero de teléfono: %s\nEmail: %s\n\n", t->nombre, t->apellidos, t->telefono, t->email);
-                return 0;
             }
             t= t->next;
         }
@@ -218,7 +217,7 @@ int modificar(){
     printf("\nIngresa el nombre de la persona para modificar su información: ");
     scanf("%s", nombretemp);
 
-    while (t != NULL)
+    while (t != NULL && t != tail)
     {
         if (strcmp(t->nombre, nombretemp) == 0)
         {
